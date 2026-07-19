@@ -130,24 +130,32 @@
     const form = document.createElement('form');
     form.className = 'change-form';
     form.innerHTML = `
-      <input class="change-input" type="number" step="1" inputmode="numeric" aria-label="Change in words for ${escapeHtml(project.name)}" placeholder="Change in words" ${project.archived ? 'disabled' : ''} required>
-      <button class="button add-button" type="submit" ${project.archived ? 'disabled' : ''}>Add</button>
+      <input class="change-input" type="number" step="1" min="1" inputmode="numeric" aria-label="Number of words for ${escapeHtml(project.name)}" placeholder="Words" ${project.archived ? 'disabled' : ''} required>
+      <button class="button add-button" type="submit" data-direction="add" ${project.archived ? 'disabled' : ''}>Add</button>
+      <button class="button remove-button" type="button" data-direction="remove" ${project.archived ? 'disabled' : ''}>Remove</button>
     `;
-    form.addEventListener('submit', event => {
-      event.preventDefault();
+
+    const recordChange = direction => {
       const input = form.querySelector('input');
-      const change = Number(input.value);
-      if (!Number.isInteger(change) || change === 0) {
-        input.setCustomValidity('Enter a whole number other than zero.');
+      const amount = Number(input.value);
+      if (!Number.isInteger(amount) || amount <= 0) {
+        input.setCustomValidity('Enter a positive whole number.');
         input.reportValidity();
         input.setCustomValidity('');
         return;
       }
+      const change = direction === 'remove' ? -amount : amount;
       project.entries.push({ id: id(), change, date: localDateKey(), createdAt: new Date().toISOString() });
       saveState();
       input.value = '';
       render();
+    };
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      recordChange('add');
     });
+    form.querySelector('.remove-button').addEventListener('click', () => recordChange('remove'));
 
     const total = document.createElement('div');
     total.className = 'project-total';

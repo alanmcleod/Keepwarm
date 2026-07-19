@@ -101,7 +101,7 @@ h2 { margin-bottom: 0; font-size: 1.15rem; }
 .project-name h3 { margin: 0 0 3px; font-size: 1rem; overflow-wrap: anywhere; }
 .project-status { margin: 0; color: var(--muted); font-size: .86rem; }
 
-.change-form { display: flex; gap: 8px; }
+.change-form { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; }
 .change-input {
   width: 100%;
   min-width: 0;
@@ -113,6 +113,7 @@ h2 { margin-bottom: 0; font-size: 1.15rem; }
 }
 
 .add-button { min-width: 60px; }
+.remove-button { min-width: 82px; background: var(--panel-soft); }
 .metric-label { display: block; color: var(--muted); font-size: .78rem; margin-bottom: 4px; }
 .metric-value { font-variant-numeric: tabular-nums; font-weight: 650; }
 
@@ -184,4 +185,9 @@ h2 { margin-bottom: 0; font-size: 1.15rem; }
   .history-entry { grid-template-columns: 1fr auto; }
   .history-running { grid-column: 1; }
   .history-delete { grid-column: 2; grid-row: 2; }
+}
+
+@media (max-width: 430px) {
+  .change-form { grid-template-columns: 1fr 1fr; }
+  .change-input { grid-column: 1 / -1; }
 }

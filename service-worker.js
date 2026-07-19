@@ -1,4 +1,4 @@
-const CACHE = 'keepwarm-v1';
+const CACHE = 'keepwarm-v2';
 const FILES = ['./', './index.html', './styles.css', './app.js', './manifest.webmanifest', './icon.svg'];
 
 self.addEventListener('install', event => {

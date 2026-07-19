@@ -21,3 +21,6 @@ Main features:
 - Rename, archive, restore and delete projects
 - Works offline after first opening
 - Can be added to an iPhone Home Screen from Safari
+
+Update:
+- Each project now has separate Add and Remove buttons, making subtraction reliable on iPhone.
