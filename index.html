@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f5f3ee" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Keepwarm" />
+  <title>Keepwarm</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>Keepwarm</h1>
+        <p class="subtitle">A simple record of your writing.</p>
+      </div>
+      <button id="newProjectBtn" class="button primary" type="button">New project</button>
+    </header>
+
+    <section class="summary" aria-label="Writing summary">
+      <div class="summary-item">
+        <span class="summary-label">Words today</span>
+        <strong id="todayTotal">0</strong>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Words yesterday</span>
+        <strong id="yesterdayTotal">0</strong>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">All projects</span>
+        <strong id="allProjectsTotal">0</strong>
+      </div>
+    </section>
+
+    <section class="projects-section">
+      <div class="section-heading">
+        <h2>Projects</h2>
+        <button id="showArchivedBtn" class="text-button" type="button">Show archived</button>
+      </div>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <p>No projects yet.</p>
+        <button id="emptyNewProjectBtn" class="button" type="button">Create your first project</button>
+      </div>
+
+      <div id="projectList" class="project-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <dialog id="projectDialog" class="dialog">
+    <form id="projectForm" method="dialog">
+      <div class="dialog-header">
+        <h2 id="projectDialogTitle">New project</h2>
+        <button class="icon-button" type="button" data-close-dialog="projectDialog" aria-label="Close">×</button>
+      </div>
+      <label>
+        Project name
+        <input id="projectNameInput" name="projectName" maxlength="80" required autocomplete="off" />
+      </label>
+      <label>
+        Starting word count <span class="optional">(optional)</span>
+        <input id="startingCountInput" name="startingCount" type="number" inputmode="numeric" step="1" min="0" placeholder="0" />
+      </label>
+      <p class="form-error" id="projectFormError" aria-live="polite"></p>
+      <div class="dialog-actions">
+        <button class="button" type="button" data-close-dialog="projectDialog">Cancel</button>
+        <button class="button primary" type="submit">Save project</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="historyDialog" class="dialog wide">
+    <div class="dialog-header">
+      <div>
+        <h2 id="historyTitle">Project history</h2>
+        <p id="historyTotal" class="dialog-subtitle"></p>
+      </div>
+      <button class="icon-button" type="button" data-close-dialog="historyDialog" aria-label="Close">×</button>
+    </div>
+    <div id="historyList" class="history-list"></div>
+    <div class="dialog-actions">
+      <button class="button" type="button" data-close-dialog="historyDialog">Close</button>
+    </div>
+  </dialog>
+
+  <dialog id="confirmDialog" class="dialog">
+    <form method="dialog">
+      <div class="dialog-header">
+        <h2 id="confirmTitle">Confirm</h2>
+        <button class="icon-button" type="button" data-close-dialog="confirmDialog" aria-label="Close">×</button>
+      </div>
+      <p id="confirmMessage"></p>
+      <div class="dialog-actions">
+        <button class="button" id="confirmCancelBtn" type="button">Cancel</button>
+        <button class="button primary" id="confirmActionBtn" type="button">Continue</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
