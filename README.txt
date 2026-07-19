@@ -24,3 +24,8 @@ Main features:
 
 Update:
 - Each project now has separate Add and Remove buttons, making subtraction reliable on iPhone.
+
+Icon update:
+- Uses PNG icons from the icons folder.
+- iPhone Home Screen icon: icons/apple-touch-icon.png
+- Manifest icons: icons/icon-192.png and icons/icon-512.png
